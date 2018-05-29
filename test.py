@@ -1,3 +1,7 @@
+from functools import reduce
+import os
+
+
 # name = input()
 name = 1
 print(name)
@@ -32,7 +36,6 @@ list_yc = list(
     m + n + q + p for m in "yc" for n in "dqwj" for q in "jzmb" for p in "sww")
 print(list_yc)
 # 应用
-import os
 list_yc = os.listdir()
 print(list_yc)
 # 生成器_斐波那契数列
@@ -157,4 +160,96 @@ for key in dict_yc:
     print(dict_yc[key])
 
 
+# map & reduce
+def f(x):
+    return x * x
+
+
+list_yc = list(map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+print(list_yc)
+
+
+def f2(a, b):
+    return a * 10 + b
+
+
+variable_yc = reduce(f2, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+print(variable_yc)
+
+# 应用
+
+
+def char2Num(s):
+    digits = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
+              '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, }
+    return digits[s]
+
+
+variable_yc = reduce(f2, map(char2Num, '4573950342'))  # 字符串转化为数字
+print(variable_yc)
+
+# 练习
+
+
+def normalLize(name):
+    # lower
+    # upper
+    # title
+    return name.capitalize()
+
+
+list_yc = list(map(normalLize, ['LSKDJ', 'sldgj', 'lkjLKJihJhOlk']))
+print(list_yc)
+
+# filter
+
+
+def is_odd(x):
+    if x % 2 == 0:
+        return True
+    return False
+
+
+list_yc = list(filter(is_odd, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+print(list_yc)
+
+variable_yc = 'sd'
+
+# return the copy of string s with leading and trailing whitespave removed.
+# variable_yc.strip()
+
+# 应用，求素数 #######################
+
+
+def _odd_iter():  # 构建奇数序列 从3开始
+    n = 1
+    while True:
+        n = n + 2
+        yield n
+
+
+def _not_divisible(n):
+    return lambda x: x % n > 0
+    # def lam(x):
+    #     return x % n > 0
+    # return lam
+    # need iterator, and tracking & debugging
+
+
+def primes():
+    yield 2
+    it = _odd_iter()
+    while True:
+        n = next(it)  # 返回序列中的数
+        yield n
+        it = filter(_not_divisible(n), it)
+
+
+list_yc = list()
+for n in primes():
+    if n > 15:
+        break
+    list_yc.append(n)
+
+print(list_yc)
 name = input()
