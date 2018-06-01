@@ -1,6 +1,7 @@
 from functools import reduce
 import os
-
+import module
+import Student
 
 # name = input()
 name = 1
@@ -229,10 +230,14 @@ def _odd_iter():  # 构建奇数序列 从3开始
 
 
 def _not_divisible(n):
-    return lambda x: x % n > 0
-    # def lam(x):
-    #     return x % n > 0
-    # return lam
+    # return lambda x: x % n > 0
+    def lam(x):
+        if n == 3:
+            print('_not_divisible, n == 3', x)
+        elif n == 5:
+            print('_not_divisible, n == 5', x)
+        return x % n > 0
+    return lam
     # need iterator, and tracking & debugging
 
 
@@ -242,14 +247,113 @@ def primes():
     while True:
         n = next(it)  # 返回序列中的数
         yield n
+
+        # 埃氏筛选法,产生筛选后新的序列
+        # filter 返回一个 Iterator
         it = filter(_not_divisible(n), it)
 
 
 list_yc = list()
 for n in primes():
-    if n > 15:
+    if n == 17:
+        list_yc.append(n)
         break
     list_yc.append(n)
 
 print(list_yc)
-name = input()
+
+# sorted 高阶函数
+list_yc = sorted([-1,2,3,-4,5], key=abs)
+print(list_yc)
+
+list_yc = sorted(['SLDsldkj','sdkjLSKD','sdfqLKJ121'], key=str.lower, reverse=False)
+print(list_yc)
+
+# 应用
+list_yc = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+
+list_yc = sorted(list_yc, key=lambda t: t[0])
+print(list_yc)
+
+list_yc = sorted(list_yc, key=lambda t: t[1])
+print(list_yc)
+
+# 返回函数
+# 返回一个计数器, 使用闭包函数
+# 列表的方式
+def count_yc():
+    counts_yc = [0]
+
+    def count_yc2():
+        counts_yc[0] = counts_yc[0] + 1
+        return counts_yc[0]
+
+    return count_yc2
+
+counts_yc = count_yc()
+print(counts_yc())
+print(counts_yc())
+
+# 生成器的方式
+def count_yc2():
+    def f(): # 尽量使用这种生成器
+        x = 0
+        while True:
+            x = x + 1
+            yield x
+
+    it = f()
+    def number():
+        num = next(it)
+        return num
+
+    return number
+
+counts_yc = count_yc2()
+while True:
+    num = counts_yc()
+    print(num)
+    if num > 10:
+        break
+         
+
+# lambda 表达式
+# 表示匿名函数，要求函数只有一个表达式，不写 return, 返回值就是该表达式的结果
+# 重写上方计数器的生成函数
+def count_yc_p():
+    def f():
+        x = 0
+        while True:
+            x = x + 1
+            yield x
+
+    it = f()
+    return lambda : next(it)
+
+counts_yc = count_yc_p()
+print('------------------------------------')
+while True:
+    num = counts_yc()
+    print(num)
+    if num > 10:
+        break
+
+
+module.printTheAuthor()
+
+# class oop
+stuYc = Student.Student("yc", 10)
+stuDqwj = Student.Student("dqwj", 100)
+print(Student.Student.counts)
+
+print(dir("anc"))
+print(len(stuYc))
+print(dir(stuYc))
+
+# stuYc.male = "male"
+
+stuYc.addr = "Yangcheng"
+print(stuYc.addr)
+
+if __name__ == '__main__':
+    print('I am here')
