@@ -43,7 +43,7 @@ class Student(object):
         if type(score) == type(1) and score >= 0 and score <= 100:
             self.__score = score
 
-    # useing @property
+    # using @property
     @property
     def addr(self):
         return self.__addr
