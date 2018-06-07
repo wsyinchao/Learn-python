@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 ###
 # File: d:\Learn-python\test3.py
-# Last Modified: Wed Jun 06 2018
+# Last Modified: Thu Jun 07 2018
 # Modified By: yinchao
 ###
 
@@ -16,6 +16,7 @@
 # f.close()
 ###
 
+import os
 import io
 from io import StringIO
 from io import BytesIO
@@ -62,6 +63,30 @@ print(f.getvalue())  #有了流之后，也是想操作文件流那样操作字�
 # "str".encode("encodeType") 转化成字节流,指定编码格式
 # b'str'.decode("encodeType") 转化成字符流，指定编码格式
 ###
+
+# 操作文件和目录
+# 查看环境变量
+print(os.environ)
+# 查看某一个
+print(os.environ.get('PATH'))
+
+## 操作目录和文件的函数放在os模块中，和os.path模块中
+# 查看当前目录的绝对路径
+print(os.path.abspath('.'))
+
+## 在某个目录下创建一个新目录(为了保证跨平台，需要借助python生成正确的路径格式)
+# 创建目录
+# os.mkdir(os.path.join('.', 'test.test'))
+
+# 删除目录
+# os.rmdir(os.path.join('.', 'test.test'))
+
+# os.path.join 合成路径
+# os.path.split() 拆分路径, 返回两个字符串，后一个总是最后一级的目录或者文件
+# os.path.splitext() 拆分路径，返回两个字符串,后一个是文件后缀名( 该方法就是用来得到文件后缀名的 )
+
+# os.rename() # 重命名
+# os.remove() # 删除
 
 if __name__ == "__main__":
     pass
